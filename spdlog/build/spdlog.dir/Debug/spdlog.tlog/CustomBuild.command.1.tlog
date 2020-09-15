@@ -1,0 +1,10 @@
+^D:\FRELANCE_HUNT\KURSWORKMAXIM\PROGRAMMGENERATOR\SPDLOG\SPDLOG\CMAKELISTS.TXT
+setlocal
+D:\cmake-3.14.0-rc2-win64-x64\bin\cmake.exe -SD:/FRELANCE_HUNT/KursWorkMAxim/ProgrammGenerator/spdlog/spdlog -BD:/FRELANCE_HUNT/KursWorkMAxim/ProgrammGenerator/spdlog/spdlog/build --check-stamp-file D:/FRELANCE_HUNT/KursWorkMAxim/ProgrammGenerator/spdlog/spdlog/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

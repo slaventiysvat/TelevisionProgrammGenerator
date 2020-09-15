@@ -1,0 +1,9 @@
+﻿  spdlog.cpp
+  stdout_sinks.cpp
+  color_sinks.cpp
+  file_sinks.cpp
+  async.cpp
+  cfg.cpp
+  fmt.cpp
+  Generating Code...
+  spdlog.vcxproj -> D:\FRELANCE_HUNT\KursWorkMAxim\ProgrammGenerator\spdlog\spdlog\build\Debug\spdlogd.lib
