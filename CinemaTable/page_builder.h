@@ -9,11 +9,7 @@ protected:
 
 private:
 
-
-public:
-
-
-    struct TV_program_init {
+   struct TV_program_init {
 
         std::string name_of_programm;
         std::string channel;
@@ -22,15 +18,15 @@ public:
         std::string name_of_cahnnel;
 
     };//TV_program_init
-
-
+    
+public:
+   TV_program_init page_init;
+   
     page_builder(std::string name_of_programm,
         std::string channel,
         std::string day_of_programm,
         std::string time_of_programm,
         std::string name_of_cahnnel) {
-
-        page_builder::TV_program_init page_init;
 
         page_init.channel = channel;
         page_init.name_of_programm = name_of_programm;
@@ -56,19 +52,19 @@ public:
     #endif
     
     };
-    void page_creator(TV_program_init page_init);
+    void page_creator(std::string name_of_html_page);
 
-    std::string get_name_of_programm(page_builder::TV_program_init page_init);
-    std::string get_channel(page_builder::TV_program_init page_init);
-    std::string get_day_of_programm(page_builder::TV_program_init page_init);
-    std::string get_time_of_programm(page_builder::TV_program_init page_init);
-    std::string get_name_of_cahnnel(page_builder::TV_program_init page_init);
+    std::string get_name_of_programm();
+    std::string get_channel();
+    std::string get_day_of_programm();
+    std::string get_time_of_programm();
+    std::string get_name_of_cahnnel();
 
-    page_builder::TV_program_init set_name_of_programm(page_builder::TV_program_init page_init, std::string set_name_of_programm);
-    page_builder::TV_program_init set_channel(page_builder::TV_program_init page_init, std::string set_channel);
-    page_builder::TV_program_init set_day_of_programm(page_builder::TV_program_init page_init, std::string set_day_of_programm);
-    page_builder::TV_program_init set_time_of_programm(page_builder::TV_program_init page_init, std::string set_time_of_programm);
-    page_builder::TV_program_init set_name_of_cahnnel(page_builder::TV_program_init page_init, std::string set_name_of_cahnnel);
+    void set_name_of_programm(std::string set_name_of_programm);
+    void set_channel(std::string set_channel);
+    void set_day_of_programm(std::string set_day_of_programm);
+    void set_time_of_programm(std::string set_time_of_programm);
+    void set_name_of_cahnnel(std::string set_name_of_cahnnel);
 };
 
 #endif /*PAGE_BUILDER*/
