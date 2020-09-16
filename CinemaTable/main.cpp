@@ -1,8 +1,5 @@
 #include <iostream>
-#include "programm.h"
-#include "programm_list.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/cfg/env.h" // for loading levels from the environment variable
+#include "help_header.h"
 
 int main(void) {
 
