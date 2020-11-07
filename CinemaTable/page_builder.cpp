@@ -1,11 +1,12 @@
 #include "page_builder.h"
 #include "help_header.h"
+#include <oistream>
 #include <fstream>
 void page_creator(std::string name_of_html_page) {
 
-
-
-
+    ofstream fout("cppstudio.html"); 
+    fout << "Работа с файлами в С++"; // запись строки в файл
+    fout.close(); // закрываем файл
 
 }
 
