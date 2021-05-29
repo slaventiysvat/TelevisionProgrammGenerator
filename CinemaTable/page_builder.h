@@ -1,7 +1,7 @@
 #ifndef PAGE_BUILDER
-#define PAGE_BUIDER
-#include <string>
+#define PAGE_BUILDER
 #include "help_header.h"
+
 class page_builder
 {
 
@@ -9,7 +9,9 @@ protected:
 
 private:
 
-   struct TV_program_init {
+public:
+
+    struct TV_program_init {
 
         std::string name_of_programm;
         std::string channel;
@@ -18,8 +20,7 @@ private:
         std::string name_of_cahnnel;
 
     };//TV_program_init
-    
-public:
+
    TV_program_init page_init;
    
     page_builder(std::string name_of_programm,
@@ -42,6 +43,7 @@ public:
 #endif
 
     }
+
     ~page_builder() {
     
     #ifdef _DEBUG
@@ -51,8 +53,7 @@ public:
 
     #endif
     
-    };
-    void page_creator(std::string name_of_html_page);
+    }
 
     std::string get_name_of_programm();
     std::string get_channel();
@@ -66,5 +67,7 @@ public:
     void set_time_of_programm(std::string set_time_of_programm);
     void set_name_of_cahnnel(std::string set_name_of_cahnnel);
 };
+
+void page_creator(std::string name_of_html_page, page_builder page_info);
 
 #endif /*PAGE_BUILDER*/

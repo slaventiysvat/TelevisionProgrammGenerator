@@ -155,16 +155,14 @@
     <ClCompile Include="console_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="page_builder.cpp" />
-    <ClCompile Include="programm.cpp" />
-    <ClCompile Include="programm_list.cpp" />
+    <ClCompile Include="page_editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console_manager.h" />
     <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="help_header.h" />
     <ClInclude Include="page_builder.h" />
-    <ClInclude Include="programm.h" />
-    <ClInclude Include="programm_list.h" />
+    <ClInclude Include="page_editor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
