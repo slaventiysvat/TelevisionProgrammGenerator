@@ -1,6 +1,6 @@
 #include "page_editor.h"
-
-
+#include <iostream>
+#include <sstream>
 void page_editor::page_navigator_default_initializer() {
 
     //page_editor::one_programm empty_field = { "00:00","01:00","history","Default Show" };
@@ -27,17 +27,108 @@ std::vector<one_programm>  page_editor::get_one_programm_data(int count_of_data,
 
 
 std::vector<one_programm> page_editor::page_navigator_add_one_programm(std::string start_time,
-    std::string end_tme,
+    std::string end_time,
     std::string genre,
     std::string name_of_cinema,
     std::vector<one_programm> programs_array) {
 
-    programs_array.at(N).end_time = end_tme;
+
+    std::string sub_str1;
+    sub_str1.push_back((char)start_time[0]);
+    sub_str1.push_back((char)start_time[1]);
+
+    std::string sub_str2;
+    sub_str2.push_back((char)start_time[3]);
+    sub_str2.push_back((char)start_time[4]);
+
+    std::stringstream str1_2_num(sub_str1);
+    std::stringstream str2_2_num(sub_str2);
+
+    int x1 = 0;
+    int y1 = 0;
+    str1_2_num >> x1;
+    str2_2_num >> y1;
+
+    std::string sub_str3;
+    std::string sub_str4;
+    sub_str3.push_back((char)end_time[0]);
+    sub_str3.push_back((char)end_time[1]);
+
+    sub_str4.push_back((char)end_time[3]);
+    sub_str4.push_back((char)end_time[4]);
+
+    std::stringstream str3_2_num(sub_str3);
+    std::stringstream str4_2_num(sub_str4);
+
+    int x2 = 0;
+    int y2 = 0;
+    str3_2_num >> x2;
+    str4_2_num >> y2;
+
+
+    if (x1 > 23 || x2 > 23) {
+
+        std::cout << "input please correct time in hours" << std::endl;
+
+    }
+
+    if (y1 > 23 || y2 > 59) {
+
+        std::cout << "input please correct time in minutes" << std::endl;
+
+    }
+
+    if ((x1 * 60 + ((y1 + 1))) > (x2 * 60 + ((y2 + 1)))) {
+
+        std::cout << "input please correct time <<start time>> must be less than <<end time>> " << std::endl;
+
+    }
+
+    int x3 = 0;
+    int y3 = 0;
+    if (N > 0) {
+    //check colision with the same time field
+    
+        std::string end_time_prev = programs_array.at(N - 1).end_time;
+        std::string start_time_prev = programs_array.at(N - 1).start_time;
+
+        std::string sub_str1prev;
+        sub_str1prev.push_back((char)start_time[0]);
+        sub_str1prev.push_back((char)start_time[1]);
+
+        std::string sub_str2prev;
+        sub_str2prev.push_back((char)start_time[3]);
+        sub_str2prev.push_back((char)start_time[4]);
+
+        std::stringstream str1_2_num_pr(sub_str1prev);
+        std::stringstream str2_2_num_pr(sub_str2prev);
+
+        str1_2_num_pr >> x3;
+        str2_2_num_pr >> y3;
+
+        if (x3 < x2) {
+        
+            std::cout << "input please correct  <end time> of programm " << std::endl;
+            
+
+        }
+
+        if (x3 < x1) {
+
+            std::cout << "input please correct <start time> of programm" << std::endl;
+
+
+        }
+
+    }
+
+    programs_array.at(N).end_time = end_time;
     programs_array.at(N).start_time = start_time;
     programs_array.at(N).genre = genre;
     programs_array.at(N).name_of_programm = name_of_cinema;
 
-    N = N + 1;
+    N = N + 1;// Control Amount of Programs
+
 
     if (N > 24) {
     
