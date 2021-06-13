@@ -35,11 +35,10 @@ public:
 
     void page_navigator_default_initializer();
 
-    std::vector<one_programm> page_navigator_add_one_programm(std::string start_time,
+    int page_navigator_add_one_programm(std::string start_time,
         std::string end_tme,
         std::string genre,
-        std::string name_of_cinema,
-        std::vector<one_programm> programs_array);
+        std::string name_of_cinema);
 
     std::vector<one_programm> get_one_programm_data(int count_of_data, std::vector<one_programm> programs_array);
 

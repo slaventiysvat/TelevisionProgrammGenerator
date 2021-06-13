@@ -4,7 +4,8 @@
 #include "page_editor.h"
 #include "console_manager.h"
 #include <sstream>
-#define CONSOLE_INPUT 1
+#include <string>
+#define CONSOLE_INPUT 0
 //spdlog::set_level(spdlog::level::debug); // Set specific logger's log level
 //spdlog::debug("This message should be displayed..");
 //spdlog::set_level(spdlog::level::off); // Set global log level to debug
@@ -39,23 +40,45 @@ std::vector<one_programm> struct_info_default  = { {"00:00","01:00","detective",
                                                     {"23:15","00:00","history","The Supreme Rome"} };
 
 
+
+std::string title_of_programm;
+std::string channel;
+std::string day_of_programm;
+std::string title_time_of_programm;
+std::string name_of_cahnnel;
+
+std::string start_time;
+std::string end_time;
+std::string genre;
+std::string name_of_programm;
+
+
 int main(void) {
 
+    std::string html_file = "simple_channel.html";
 
-    //start time must be less than end time, 
-    //also start time must be bigger than previous time
-    //first 2 number must be in the ranïe from 00 to 23 and integer
-    //second one 00 to 59;
-
-    std::string start_time = "11:15";
-    std::string end_time = "11:16";
-
-   
+    //default parametres
     std::string title_of_programm = "Name Of Cinema";
-    std::string channel = "MaxChannel";
-    std::string day_of_programm = "Tuesday";
     std::string title_time_of_programm = "Time";
-    std::string name_of_cahnnel = "MyTV";
+    std::string channel = "MaxChannel";
+
+#if CONSOLE_INPUT == 1
+    std::cout << "Input please info about programm page" << std::endl;
+    std::cout << "Input Name of Channel" << std::endl;
+    getline(std::cin, name_of_cahnnel);
+    std::cout << "Input Day of Programm" << std::endl;
+    getline(std::cin, day_of_programm);
+    std::cout << "Input Please Name of HTML file" << std::endl;
+    getline(std::cin, html_file);
+#endif
+
+#if CONSOLE_INPUT == 0
+    title_of_programm = "Name Of Cinema";
+    channel = "MaxChannel";
+    day_of_programm = "Tuesday";
+    title_time_of_programm = "Time";
+    name_of_cahnnel = "MyTV";
+#endif
 
     page_builder new_page(title_of_programm, 
                           channel, day_of_programm,
@@ -64,44 +87,59 @@ int main(void) {
 
     page_creator("simple_channel.html",new_page);
 
-    page_editor new_edit_page("simple_channel.html","16:00","17:00","Comedy","How To be a Storng Man");
-    
+    page_editor new_edit_page("simple_channel.html");
+#if CONSOLE_INPUT == 1
+    std::cout << "======================================= " << std::endl;
+    std::cout << "Input Please information Programms in special format " << std::endl;
+    std::cout << "start time =  " << std::endl;
+    std::cout << "end time  = " << std::endl;
+    std::cout << "genre =  " << std::endl;
+    std::cout << "name of programm  = " << std::endl;
+    std::cout << "======================================= " << std::endl;
 
 
+    std::string start_time;
+    std::string end_time;
+    std::string genre;
+    std::string name_of_programm;
 
+    for (int i = 0; i < 24; i++) {
 
+        std::cout << "Input Please information of = " << " " << i << " " << "Programm" << std::endl;
+        std::cout << "start time =  " << std::endl;
+        getline(std::cin, start_time);
+        std::cout << "end time  = " << std::endl;
+        getline(std::cin, end_time);
+        std::cout << "genre =  " << std::endl;
+        getline(std::cin, genre);
+        std::cout << "name of programm  = " << std::endl;
+        getline(std::cin, name_of_programm);
+        int cond = new_edit_page.page_navigator_add_one_programm(start_time, end_time, genre, name_of_programm);
+        std::cout << "======================================= " << std::endl;
+        if (cond == -1) {
+            i = i - 1;
+            if (i < 0) { i = 0; }
+        }
+    }
+#endif
+ 
 
+#if CONSOLE_INPUT == 0
 
+    for (int i = 0; i < 24; i++) {
 
-    //new_edit_page.page_navigator_default_initializer();
+        std::string start_time = struct_info_default[i].start_time;
+        std::string end_time = struct_info_default[i].end_time;
+        std::string genre = struct_info_default[i].genre;
+        std::string name_of_programm = struct_info_default[i].name_of_programm;
+        int cond = new_edit_page.page_navigator_add_one_programm(start_time, end_time, genre, name_of_programm);
+        
+   }
 
+#endif
+
+    //write information to HTML file
     page_updater_func("simple_channel.html", new_edit_page, new_page);
-
-   // std::vector<one_programm> tmp_struct;
-
-   // tmp_struct.push_back(one_programm());
-
-   // for (int i = 0; i < 22; i++) {
-   // 
-   //     tmp_struct.at(0) = struct_info_default.at(i);
-
-   ///*     tmp_struct.at(N).end_time = end_tme;
-   //     tmp_struct.at(N).start_time = start_time;
-   //     tmp_struct.at(N).genre = genre;
-   //     tmp_struct.at(N).name_of_programm = name_of_cinema;*/
-
-   //     new_edit_page.page_navigator = new_edit_page.page_navigator_add_one_programm(tmp_struct.at(0).start_time,
-   //         tmp_struct.at(0).end_time,
-   //         tmp_struct.at(0).genre,
-   //         tmp_struct.at(0).name_of_programm,
-   //         new_edit_page.page_navigator);
-   // 
-   // 
-   // }
-
-   // std::vector<one_programm> struct_info = new_edit_page.get_one_programm_data(2, new_edit_page.page_navigator);
-
-   
 
     return 0;
 }

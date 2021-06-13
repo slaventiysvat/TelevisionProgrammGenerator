@@ -26,12 +26,12 @@ std::vector<one_programm>  page_editor::get_one_programm_data(int count_of_data,
 }
 
 
-std::vector<one_programm> page_editor::page_navigator_add_one_programm(std::string start_time,
+int page_editor::page_navigator_add_one_programm(std::string start_time,
     std::string end_time,
     std::string genre,
-    std::string name_of_cinema,
-    std::vector<one_programm> programs_array) {
+    std::string name_of_cinema) {
 
+    int condition = 0;
 
     std::string sub_str1;
     sub_str1.push_back((char)start_time[0]);
@@ -69,36 +69,39 @@ std::vector<one_programm> page_editor::page_navigator_add_one_programm(std::stri
     if (x1 > 23 || x2 > 23) {
 
         std::cout << "input please correct time in hours" << std::endl;
-
+        condition = -1;
+        return condition;
     }
 
-    if (y1 > 23 || y2 > 59) {
+    if (y1 > 59 || y2 > 59) {
 
         std::cout << "input please correct time in minutes" << std::endl;
-
+        condition = -1;
+        return condition;
     }
 
     if ((x1 * 60 + ((y1 + 1))) > (x2 * 60 + ((y2 + 1)))) {
 
         std::cout << "input please correct time <<start time>> must be less than <<end time>> " << std::endl;
-
+        condition = -1;
+        return condition;
     }
 
     int x3 = 0;
     int y3 = 0;
     if (N > 0) {
     //check colision with the same time field
-    
-        std::string end_time_prev = programs_array.at(N - 1).end_time;
-        std::string start_time_prev = programs_array.at(N - 1).start_time;
+        
+        std::string end_time_prev = page_navigator.at(N - 1).end_time;
+        std::string start_time_prev = page_navigator.at(N - 1).start_time;
 
         std::string sub_str1prev;
-        sub_str1prev.push_back((char)start_time[0]);
-        sub_str1prev.push_back((char)start_time[1]);
+        sub_str1prev.push_back((char)start_time_prev[0]);
+        sub_str1prev.push_back((char)start_time_prev[1]);
 
         std::string sub_str2prev;
-        sub_str2prev.push_back((char)start_time[3]);
-        sub_str2prev.push_back((char)start_time[4]);
+        sub_str2prev.push_back((char)end_time_prev[3]);
+        sub_str2prev.push_back((char)end_time_prev[4]);
 
         std::stringstream str1_2_num_pr(sub_str1prev);
         std::stringstream str2_2_num_pr(sub_str2prev);
@@ -106,26 +109,26 @@ std::vector<one_programm> page_editor::page_navigator_add_one_programm(std::stri
         str1_2_num_pr >> x3;
         str2_2_num_pr >> y3;
 
-        if (x3 < x2) {
+        if (x3 > x2) {
         
             std::cout << "input please correct  <end time> of programm " << std::endl;
-            
-
+            condition = -1;
+            return condition;
         }
 
-        if (x3 < x1) {
+        if (x3 > x1) {
 
             std::cout << "input please correct <start time> of programm" << std::endl;
-
-
+            condition = -1;
+            return condition;
         }
 
     }
 
-    programs_array.at(N).end_time = end_time;
-    programs_array.at(N).start_time = start_time;
-    programs_array.at(N).genre = genre;
-    programs_array.at(N).name_of_programm = name_of_cinema;
+    page_navigator.at(N).end_time = end_time;
+    page_navigator.at(N).start_time = start_time;
+    page_navigator.at(N).genre = genre;
+    page_navigator.at(N).name_of_programm = name_of_cinema;
 
     N = N + 1;// Control Amount of Programs
 
@@ -133,10 +136,10 @@ std::vector<one_programm> page_editor::page_navigator_add_one_programm(std::stri
     if (N > 24) {
     
         spdlog::error("Out of range");
-
+        condition = -1;
     }
 
-    return programs_array;
+    return condition = -1;
 }
 
 
